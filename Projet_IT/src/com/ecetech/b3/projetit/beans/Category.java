@@ -5,7 +5,7 @@ public class Category {
 	private String nomCategory;
 
 	/**
-	 * builders
+	 * builders J'ai changé ça
 	 */
 	public Category(int idCategory, String nomCategory) {
 		super();
