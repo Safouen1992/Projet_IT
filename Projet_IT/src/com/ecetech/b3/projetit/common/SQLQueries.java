@@ -16,7 +16,7 @@ public class SQLQueries {
 	public static final String UPDATE_COMMENT_QUERY = "UPDATE `comment` SET contenuComment=? WHERE idComment=";
 	public static final String DELETE_COMMENT_QUERY = "DELETE FROM `comment` WHERE idComment=";
 
-	/*queries for Event*///test
+	/*queries for Event*/
 
 
 	

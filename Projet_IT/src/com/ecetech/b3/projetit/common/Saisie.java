@@ -3,7 +3,7 @@ package com.ecetech.b3.projetit.common;
 import java.io.*;
 
 public class Saisie {
-	// Méthodes de saisies
+	// Méthodes
 	public static String lireChaine(String message) {
 		String ligne = null;
 		try {
