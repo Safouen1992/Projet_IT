@@ -17,6 +17,8 @@ public class SQLQueries {
 	public static final String DELETE_COMMENT_QUERY = "DELETE FROM `comment` WHERE idComment=";
 
 	/*queries for Event*/
+	public static final String GET_COMMENT_QUERY = "SELECT DISTINCT * FROM `comment` WHERE comment.idComment=";
+
 	
 	/*queries for User*/
 	public static final String GET_USER_QUERY = "SELECT DISTINCT * FROM `user` WHERE idUser =";
