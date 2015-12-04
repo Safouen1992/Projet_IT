@@ -17,6 +17,7 @@ public class SQLQueries {
 	public static final String DELETE_COMMENT_QUERY = "DELETE FROM `comment` WHERE idComment=";
 
 	/*queries for Event*///test
+	//J'ai bien reçu
 
 	
 	/*queries for User*/
