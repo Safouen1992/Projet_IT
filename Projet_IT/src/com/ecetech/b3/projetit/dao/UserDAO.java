@@ -40,4 +40,9 @@ public class UserDAO {
 		}
 		return user;
 	}
+	
+	public ArrayList<User> getAllUSer(){
+		ArrayList<User> listUser = new ArrayList<User>();
+		return listUser;
+	}
 }
