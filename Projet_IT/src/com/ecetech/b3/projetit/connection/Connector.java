@@ -8,7 +8,7 @@ public class Connector {
 	 * Attributes
 	 */
 	private static Connector instance = new Connector();
-	private static final String URL = "jdbc:mysql://37.187.53.240:3306/projetit";//37.187.53.240 : adresse de la machine localhost 127.0.0.1
+	private static final String URL = "jdbc:mysql://127.0.0.1:3306/projetit";//37.187.53.240 : adresse de la machine localhost 127.0.0.1
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
 	private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";

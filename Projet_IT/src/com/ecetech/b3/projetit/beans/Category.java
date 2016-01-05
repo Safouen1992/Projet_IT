@@ -1,38 +1,65 @@
 package com.ecetech.b3.projetit.beans;
 
 public class Category {
-	private int idCategory;
-	private String nomCategory;
-
+	
 	/**
-	 * builders
+	 * Attributes
 	 */
-	public Category(int idCategory, String nomCategory) {
-		super();
-		this.idCategory = idCategory;
-		this.nomCategory = nomCategory;
-	}
-
-	public Category() {
-		this(0, null);
-	}
+	private int idCategory;
+	private String nameCategory;
 
 	/**
-	 * getters & setters
+	 * 
+	 * @return The id of a Category
 	 */
 	public int getIdCategory() {
 		return idCategory;
 	}
-
+	/**
+	 * 
+	 * @param idCategory The id of a Category
+	 */
 	public void setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
 	}
-
-	public String getNomCategory() {
-		return nomCategory;
+	/**
+	 * 
+	 * @return The name of a Category
+	 */
+	public String getNameCategory() {
+		return nameCategory;
 	}
-
-	public void setNomCategory(String nomCategory) {
-		this.nomCategory = nomCategory;
+	/**
+	 * 
+	 * @param nameCategory The name of a Category
+	 */
+	public void setNameCategory(String nameCategory) {
+		this.nameCategory = nameCategory;
 	}
+	
+	/**
+	 * Constructor
+	 * @param idCategory
+	 * 		
+	 * @param nomCategory
+	 */
+	public Category(int idCategory, String nameCategory) {
+		super();
+		this.idCategory = idCategory;
+		this.nameCategory = nameCategory;
+	}
+	/**
+	 * Constructor null
+	 */
+	public Category() {
+		this(0, null);
+	}
+	
+	/**
+	 * Display the attributes of a Category
+	 */
+	public void display() {
+		System.out.println("idCategory: " + this.idCategory + ", nameCategory: " + this.nameCategory);
+	}
+	
 }

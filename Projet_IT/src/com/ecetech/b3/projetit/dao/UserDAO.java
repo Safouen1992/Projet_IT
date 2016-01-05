@@ -1,35 +1,121 @@
 package com.ecetech.b3.projetit.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.ecetech.b3.projetit.beans.*;
-import com.ecetech.b3.projetit.connection.*;
-import com.ecetech.b3.projetit.common.*;
-
+import com.ecetech.b3.projetit.beans.User;
+import com.ecetech.b3.projetit.common.SQLQueries;
+import com.ecetech.b3.projetit.connection.Connector;
 
 public class UserDAO {
-	
+
+	/**
+	 * Attributes
+	 */
 	private Connection connection;
 	private Statement statement;
-	private User user;
 
-	public User getUser(int idUser) throws SQLException {
-		String query = SQLQueries.GET_USER_QUERY + idUser;
+	/**
+	 * Constructor
+	 */
+	public UserDAO() {
+	}
+
+	/**
+	 * Retrieves a User from the database and then creates a Category object
+	 * to represent it
+	 * 
+	 * @param user
+	 *            An object User containing the informations sought
+	 * @return A User object with all its attributes from the database
+	 * @throws SQLException
+	 *             SQL Exception in case it didn't work properly
+	 */
+	public ArrayList<User> getUser(User user) throws SQLException {
+		PreparedStatement req = null;
+		String query = SQLQueries.GET_USER_QUERY;
+		ArrayList<User> usrs = new ArrayList<User>();
+		try {
+			connection = Connector.getConnection();
+			req = connection.prepareStatement(query);
+			if(0 == user.getIdUser()){
+				req.setString(1, "%");
+			}else {
+				req.setInt(1, user.getIdUser());
+			}
+			if(null == user.getNameUser()){
+				req.setString(2, "%");
+			}else {
+				req.setString(2, "%" + user.getNameUser() + "%");
+			}
+			if(null == user.getPasswordUser()){
+				req.setString(3, "%");
+			}else {
+				req.setString(3, "%" + user.getPasswordUser() + "%");
+			}
+			if(null == user.getMailUser()){
+				req.setString(4, "%");
+			}else {
+				req.setString(4, "%" + user.getMailUser() + "%");
+			}
+			if(-1 == user.getOkUser()){
+				req.setString(5, "%");
+			}else {
+				req.setInt(5, user.getOkUser());
+			}
+			if(-1 == user.getAdminUser()){
+				req.setString(6, "%");
+			}else {
+				req.setInt(6, user.getAdminUser());
+			}
+			ResultSet rs = req.executeQuery();
+			while (rs.next()){
+				User usr = new User();
+				usr.setIdUser(rs.getInt("IdUser"));
+				usr.setNameUser(rs.getString("nameUser"));
+				usr.setPasswordUser(rs.getString("passwordUser"));
+				usr.setMailUser(rs.getString("mailUser"));
+				usr.setOkUser(rs.getInt("okUser"));
+				usr.setAdminUser(rs.getInt("adminUser"));
+				usrs.add(usr);
+			}
+		} finally {
+			if (req != null)
+				req.close();
+			connection.close();
+		}
+		return usrs;
+	}
+
+	/**
+	 * Retrieves all User from the database and then puts them all in a list
+	 * 
+	 * @return A list of User objects with all their attributes from the
+	 *         database
+	 * @throws SQLException
+	 *             SQL Exception in case it didn't work properly
+	 */
+	public ArrayList<User> getAllUser() throws SQLException {
+		String query = SQLQueries.GET_ALL_USER_QUERY;
 		ResultSet rs = null;
-		User user = null;
+		ArrayList<User> usrs = new ArrayList<User>();
 		try {
 			connection = Connector.getConnection();
 			statement = connection.createStatement();
 			rs = statement.executeQuery(query);
-			if (rs.next()) {
-				user = new User();
-				user.setIdUser(rs.getInt("idUser"));
-				user.setMailUser(rs.getString("mailUser"));
-				user.setNomUser(rs.getString("nomUser"));
-				user.setPasswordUser(rs.getString("passwordUser"));
-				user.setOkUser(rs.getBoolean("okUser"));
-				user.setAdminUser(rs.getBoolean("adminUser"));
+			while (rs.next()) {
+				User usr = new User();
+				usr.setIdUser(rs.getInt("IdUser"));
+				usr.setNameUser(rs.getString("nameUser"));
+				usr.setPasswordUser(rs.getString("passwordUser"));
+				usr.setMailUser(rs.getString("mailUser"));
+				usr.setOkUser(rs.getInt("okUser"));
+				usr.setAdminUser(rs.getInt("adminUser"));
+				usrs.add(usr);
 			}
 		} finally {
 			if (statement != null)
@@ -38,11 +124,91 @@ public class UserDAO {
 				rs.close();
 			connection.close();
 		}
-		return user;
+		return usrs;
 	}
-	
-	public ArrayList<User> getAllUSer(){
-		ArrayList<User> listUser = new ArrayList<User>();
-		return listUser;
+
+	/**
+	 * Inserts a new User into the database
+	 * 
+	 * @param user
+	 *            The User to add to the database
+	 * @throws SQLException
+	 *             SQL Exception in case it didn't work properly
+	 */
+	public void insertUser(User user) throws SQLException {
+		PreparedStatement req = null;
+		String query = SQLQueries.INSERT_USER_QUERY;
+		try {
+			connection = Connector.getConnection();
+			req = connection.prepareStatement(query);
+			req.setInt(1, user.getIdUser());
+			req.setString(2, user.getNameUser());
+			req.setString(3, user.getPasswordUser());
+			req.setString(4, user.getMailUser());
+			req.setInt(5, user.getOkUser());
+			req.setInt(6, user.getAdminUser());
+			req.executeUpdate();
+			System.out.print("User inserted: ");
+			user.display();
+		} finally {
+			if (req != null)
+				req.close();
+			connection.close();
+		}
+	}
+
+	/**
+	 * Updates a User already in the database
+	 * 
+	 * @param user
+	 *            The User Participate to send to the database
+	 * @throws SQLException
+	 *             SQL Exception in case it didn't work properly
+	 */
+	public void updateUser(User user) throws SQLException {
+		PreparedStatement req;
+		String query = SQLQueries.UPDATE_USER_QUERY;
+		try {
+			connection = Connector.getConnection();
+			req = connection.prepareStatement(query);
+			req.setString(1, user.getNameUser());
+			req.setString(2, user.getPasswordUser());
+			req.setString(3, user.getMailUser());
+			req.setInt(4, user.getOkUser());
+			req.setInt(5, user.getAdminUser());
+			req.setInt(6, user.getIdUser());
+			req.executeUpdate();
+			System.out.print("User updated : ");
+			user.display();
+		} finally {
+			if (statement != null)
+				statement.close();
+			connection.close();
+		}
+	}
+
+	/**
+	 * Deletes a User from the database
+	 * 
+	 * @param idUser
+	 *            The identifying number of the room to delete
+	 * @throws SQLException
+	 *             SQL Exception in case it didn't work properly
+	 */
+	public void deleteUser(int idUser) throws SQLException {
+		PreparedStatement req;
+		String query = SQLQueries.DELETE_USER_QUERY;
+		try {
+			connection = Connector.getConnection();
+			req = connection.prepareStatement(query);
+			req.setInt(1, idUser);
+			req.executeUpdate();
+			System.out.println("Participate deleted : " + idUser);
+		} finally {
+			if (statement != null)
+				statement.close();
+			connection.close();
+		}
 	}
 }
+
