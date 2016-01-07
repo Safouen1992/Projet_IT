@@ -2,33 +2,46 @@ package com.ecetech.b3.projetit.test;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import org.junit.Test;
+
+import com.ecetech.b3.projetit.beans.Participate;
+import com.ecetech.b3.projetit.beans.User;
+import com.ecetech.b3.projetit.dao.UserDAO;
 
 public class UserDAOTest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void test() throws SQLException {
+		User usr = new User();
+		ArrayList<User> usrs = new ArrayList<User>();
+		UserDAO usrDAO = new UserDAO();
+		
+		usrDAO.getUser(usr);
+		
+		usr.setAdminUser(1);
+		usr.setIdUser(5);
+		usr.setMailUser("monMail@monhebergeur.com");
+		usr.setNameUser("Bouboule");
+		usr.setOkUser(1);
+		usr.setPasswordUser("azertyuiop");
+		usrDAO.insertUser(usr);
+		usrs = usrDAO.getAllUser();
+		for(User u : usrs)
+			u.display();
+		
+		usr.setNameUser("BouboulePartiManger");
+		usrDAO.updateUser(usr);
+		usrs = usrDAO.getAllUser();
+		for(User u : usrs)
+			u.display();
+		
+		usrDAO.deleteUser(usr.getIdUser());
+		usrs = usrDAO.getAllUser();
+		for(User u : usrs)
+			u.display();
 	}
 
 }

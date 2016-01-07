@@ -179,13 +179,11 @@ public class EventDAO {
 		try {
 			connection = Connector.getConnection();
 			req = connection.prepareStatement(query);
-			req.setInt(1, event.getIdCategory());
-			req.setInt(2, event.getIdUser());
-			req.setString(3, event.getNameEvent());
-			req.setDate(4, event.getDateEvent());
-			req.setString(5, event.getPlaceEvent());
-			req.setString(6, event.getContentEvent());
-			req.setInt(7, event.getIdEvent());
+			req.setString(1, event.getNameEvent());
+			req.setDate(2, event.getDateEvent());
+			req.setString(3, event.getPlaceEvent());
+			req.setString(4, event.getContentEvent());
+			req.setInt(5, event.getIdEvent());
 			req.executeUpdate();
 			System.out.println("Event updated :");
 			event.display();

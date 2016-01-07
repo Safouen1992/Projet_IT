@@ -14,7 +14,7 @@ public class SQLQueries {
 	public static final String GET_ALL_COMMENT_QUERY = "SELECT DISTINCT * FROM comment";
 	public static final String INSERT_COMMENT_QUERY = "INSERT INTO comment (`idComment`, `idParticipate`, `contentComment`) values (?,?,?)";
 	public static final String UPDATE_COMMENT_QUERY = "UPDATE comment SET contentComment=? WHERE idComment=?";
-	public static final String DELETE_COMMENT_QUERY = "DELETE FROM comment WHERE idCategory=?";
+	public static final String DELETE_COMMENT_QUERY = "DELETE FROM comment WHERE idComment=?";
 	
 	/*queries for Event*/
 	public static final String GET_EVENT_QUERY = "SELECT DISTINCT * FROM event WHERE idEvent LIKE ? AND idCategory LIKE ? AND idUser LIKE ? AND nameEvent LIKE ? AND dateEvent LIKE ? AND placeEvent LIKE ? AND contentEvent LIKE ?";

@@ -114,7 +114,7 @@ public class CommentDAO {
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void insertCategory(Comment comment) throws SQLException {
+	public void insertComment(Comment comment) throws SQLException {
 		PreparedStatement req = null;
 		String query = SQLQueries.INSERT_COMMENT_QUERY;
 		try {
@@ -124,7 +124,7 @@ public class CommentDAO {
 			req.setInt(2, comment.getIdParticipate());
 			req.setString(3, comment.getContentComment());
 			req.executeUpdate();
-			System.out.println("Comment inserted : ");
+			System.out.print("Comment inserted : ");
 			comment.display();
 		} finally {
 			if (req != null)
@@ -149,9 +149,8 @@ public class CommentDAO {
 			req = connection.prepareStatement(query);
 			req.setString(1, comment.getContentComment());
 			req.setInt(2, comment.getIdComment());
-			req.setInt(3, comment.getIdComment());
 			req.executeUpdate();
-			System.out.println("Comment updated :");
+			System.out.print("Comment updated :");
 			comment.display();
 		} finally {
 			if (statement != null)
@@ -176,7 +175,7 @@ public class CommentDAO {
 			req = connection.prepareStatement(query);
 			req.setInt(1, idComment);
 			req.executeUpdate();
-			System.out.println("Comment deleted : " + idComment);
+			System.out.print("Comment deleted : " + idComment);
 		} finally {
 			if (statement != null)
 				statement.close();

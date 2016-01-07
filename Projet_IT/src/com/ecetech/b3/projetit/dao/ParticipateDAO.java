@@ -168,7 +168,7 @@ public class ParticipateDAO {
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void deleteCategory(int idParticipate) throws SQLException {
+	public void deleteParticipate(int idParticipate) throws SQLException {
 		PreparedStatement req;
 		String query = SQLQueries.DELETE_PARTICIPATE_QUERY;
 		try {
