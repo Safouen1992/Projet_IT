@@ -111,10 +111,12 @@ public class ParticipateDAO {
 	 * 
 	 * @param participate
 	 *            The Participate to add to the database
+	 * @return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void insertParticipate(Participate participate) throws SQLException {
+	public int insertParticipate(Participate participate) throws SQLException {
+		int result = -1;
 		PreparedStatement req = null;
 		String query = SQLQueries.INSERT_PARTICIPATE_QUERY;
 		try {
@@ -123,7 +125,7 @@ public class ParticipateDAO {
 			req.setInt(1, participate.getIdParticipate());
 			req.setInt(2, participate.getIdEvent());
 			req.setInt(3, participate.getIdUser());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Participate inserted: ");
 			participate.display();
 		} finally {
@@ -131,6 +133,7 @@ public class ParticipateDAO {
 				req.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -138,10 +141,12 @@ public class ParticipateDAO {
 	 * 
 	 * @param participate
 	 *            The updated Participate to send to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void updateParticipate(Participate participate) throws SQLException {
+	public int updateParticipate(Participate participate) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.UPDATE_PARTICIPATE_QUERY;
 		try {
@@ -150,7 +155,7 @@ public class ParticipateDAO {
 			req.setInt(1, participate.getIdEvent());
 			req.setInt(2, participate.getIdUser());
 			req.setInt(3, participate.getIdParticipate());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Category updated : ");
 			participate.display();
 		} finally {
@@ -158,6 +163,7 @@ public class ParticipateDAO {
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -165,23 +171,26 @@ public class ParticipateDAO {
 	 * 
 	 * @param idParticipate
 	 *            The identifying number of the room to delete
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void deleteParticipate(int idParticipate) throws SQLException {
+	public int deleteParticipate(int idParticipate) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.DELETE_PARTICIPATE_QUERY;
 		try {
 			connection = Connector.getConnection();
 			req = connection.prepareStatement(query);
 			req.setInt(1, idParticipate);
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.println("Participate deleted : " + idParticipate);
 		} finally {
 			if (statement != null)
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 }
 

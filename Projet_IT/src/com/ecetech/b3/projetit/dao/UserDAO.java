@@ -132,10 +132,12 @@ public class UserDAO {
 	 * 
 	 * @param user
 	 *            The User to add to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void insertUser(User user) throws SQLException {
+	public int insertUser(User user) throws SQLException {
+		int result = -1;
 		PreparedStatement req = null;
 		String query = SQLQueries.INSERT_USER_QUERY;
 		try {
@@ -147,7 +149,7 @@ public class UserDAO {
 			req.setString(4, user.getMailUser());
 			req.setInt(5, user.getOkUser());
 			req.setInt(6, user.getAdminUser());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("User inserted: ");
 			user.display();
 		} finally {
@@ -155,6 +157,7 @@ public class UserDAO {
 				req.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -162,10 +165,12 @@ public class UserDAO {
 	 * 
 	 * @param user
 	 *            The User Participate to send to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void updateUser(User user) throws SQLException {
+	public int updateUser(User user) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.UPDATE_USER_QUERY;
 		try {
@@ -177,7 +182,7 @@ public class UserDAO {
 			req.setInt(4, user.getOkUser());
 			req.setInt(5, user.getAdminUser());
 			req.setInt(6, user.getIdUser());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("User updated : ");
 			user.display();
 		} finally {
@@ -185,6 +190,7 @@ public class UserDAO {
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -192,23 +198,26 @@ public class UserDAO {
 	 * 
 	 * @param idUser
 	 *            The identifying number of the room to delete
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void deleteUser(int idUser) throws SQLException {
+	public int deleteUser(int idUser) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.DELETE_USER_QUERY;
 		try {
 			connection = Connector.getConnection();
 			req = connection.prepareStatement(query);
 			req.setInt(1, idUser);
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.println("Participate deleted : " + idUser);
 		} finally {
 			if (statement != null)
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 }
 

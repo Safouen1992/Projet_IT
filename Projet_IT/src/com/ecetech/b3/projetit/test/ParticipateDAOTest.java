@@ -7,12 +7,56 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.ecetech.b3.projetit.beans.Event;
+
 import com.ecetech.b3.projetit.beans.Participate;
 import com.ecetech.b3.projetit.dao.ParticipateDAO;
 
 public class ParticipateDAOTest {
 
+	@Test
+	public void testGet() throws SQLException {
+		Participate par = new Participate();
+		ParticipateDAO parDAO = new ParticipateDAO();
+		ArrayList<Participate> pars = parDAO.getParticipate(par);
+		assert 1 == pars.get(0).getIdEvent();
+	}
+	
+	@Test
+	public void testInsert() throws SQLException {
+		Participate par = new Participate();
+		ParticipateDAO parDAO = new ParticipateDAO();
+		par.setIdParticipate(6);
+		par.setIdEvent(1);
+		par.setIdUser(4);
+		int i = parDAO.insertParticipate(par);
+		assert 1 == i;
+		parDAO.deleteParticipate(6);
+	}
+	
+	/*@Test
+	public void testUpdate() throws SQLException {
+		Participate par = new Participate();
+		ParticipateDAO parDAO = new ParticipateDAO();
+		par.setIdParticipate(6);
+		par.setIdEvent(1);
+		par.setIdUser(4);
+		parDAO.insertParticipate(par);
+		int i = parDAO.updateParticipate(par);
+		assert 1 == i;
+		parDAO.deleteParticipate(6);
+	}*/
+	
+	@Test
+	public void testDelete() throws SQLException {
+		Participate par = new Participate();
+		par.setIdParticipate(6);
+		par.setIdEvent(1);
+		par.setIdUser(4);
+		ParticipateDAO parDAO = new ParticipateDAO();
+		int i = parDAO.deleteParticipate(6);
+		assert 1 == i;
+	}
+	
 	@Test
 	public void test() throws SQLException {
 		Participate par = new Participate();

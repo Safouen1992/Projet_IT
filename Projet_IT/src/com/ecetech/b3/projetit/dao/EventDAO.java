@@ -139,10 +139,12 @@ public class EventDAO {
 	 * 
 	 * @param event
 	 *            The Comment to add to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void insertEvent(Event event) throws SQLException {
+	public int insertEvent(Event event) throws SQLException {
+		int result = -1;
 		PreparedStatement req = null;
 		String query = SQLQueries.INSERT_EVENT_QUERY;
 		try {
@@ -155,7 +157,7 @@ public class EventDAO {
 			req.setDate(5, event.getDateEvent());
 			req.setString(6, event.getPlaceEvent());
 			req.setString(7, event.getContentEvent());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.println("Eventinserted : ");
 			event.display();
 		} finally {
@@ -163,6 +165,7 @@ public class EventDAO {
 				req.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -170,10 +173,12 @@ public class EventDAO {
 	 * 
 	 * @param event
 	 *            The updated Comment to send to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void updateEvent(Event event) throws SQLException {
+	public int updateEvent(Event event) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.UPDATE_EVENT_QUERY;
 		try {
@@ -184,7 +189,7 @@ public class EventDAO {
 			req.setString(3, event.getPlaceEvent());
 			req.setString(4, event.getContentEvent());
 			req.setInt(5, event.getIdEvent());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.println("Event updated :");
 			event.display();
 		} finally {
@@ -192,6 +197,7 @@ public class EventDAO {
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -199,23 +205,26 @@ public class EventDAO {
 	 * 
 	 * @param idEvent
 	 *            The identifying number of the room to delete
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void deleteEvent(int idEvent) throws SQLException {
+	public int deleteEvent(int idEvent) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.DELETE_EVENT_QUERY;
 		try {
 			connection = Connector.getConnection();
 			req = connection.prepareStatement(query);
 			req.setInt(1, idEvent);
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.println("Event deleted : " + idEvent);
 		} finally {
 			if (statement != null)
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 }
 

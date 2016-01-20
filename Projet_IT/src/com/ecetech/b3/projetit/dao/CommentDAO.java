@@ -111,10 +111,12 @@ public class CommentDAO {
 	 * 
 	 * @param comment
 	 *            The Comment to add to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void insertComment(Comment comment) throws SQLException {
+	public int insertComment(Comment comment) throws SQLException {
+		int result = -1;
 		PreparedStatement req = null;
 		String query = SQLQueries.INSERT_COMMENT_QUERY;
 		try {
@@ -123,7 +125,7 @@ public class CommentDAO {
 			req.setInt(1, comment.getIdComment());
 			req.setInt(2, comment.getIdParticipate());
 			req.setString(3, comment.getContentComment());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Comment inserted : ");
 			comment.display();
 		} finally {
@@ -131,6 +133,7 @@ public class CommentDAO {
 				req.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -138,10 +141,12 @@ public class CommentDAO {
 	 * 
 	 * @param comment
 	 *            The updated Comment to send to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void updateComment(Comment comment) throws SQLException {
+	public int updateComment(Comment comment) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.UPDATE_COMMENT_QUERY;
 		try {
@@ -149,7 +154,7 @@ public class CommentDAO {
 			req = connection.prepareStatement(query);
 			req.setString(1, comment.getContentComment());
 			req.setInt(2, comment.getIdComment());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Comment updated :");
 			comment.display();
 		} finally {
@@ -157,6 +162,7 @@ public class CommentDAO {
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -164,23 +170,26 @@ public class CommentDAO {
 	 * 
 	 * @param idComment
 	 *            The identifying number of the room to delete
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void deleteComment(int idComment) throws SQLException {
+	public int deleteComment(int idComment) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.DELETE_COMMENT_QUERY;
 		try {
 			connection = Connector.getConnection();
 			req = connection.prepareStatement(query);
 			req.setInt(1, idComment);
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Comment deleted : " + idComment);
 		} finally {
 			if (statement != null)
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 }
 

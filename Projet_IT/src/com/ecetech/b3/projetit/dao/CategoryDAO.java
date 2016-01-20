@@ -104,10 +104,12 @@ public class CategoryDAO {
 	 * 
 	 * @param category
 	 *            The Category to add to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void insertCategory(Category category) throws SQLException {
+	public int insertCategory(Category category) throws SQLException {
+		int result = -1;
 		PreparedStatement req = null;
 		String query = SQLQueries.INSERT_CATEGORY_QUERY;
 		try {
@@ -115,7 +117,7 @@ public class CategoryDAO {
 			req = connection.prepareStatement(query);
 			req.setInt(1, category.getIdCategory());
 			req.setString(2, category.getNameCategory());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Category inserted: ");
 			category.display();
 		} finally {
@@ -123,6 +125,7 @@ public class CategoryDAO {
 				req.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -130,10 +133,12 @@ public class CategoryDAO {
 	 * 
 	 * @param category
 	 *            The updated Category to send to the database
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void updateCategory(Category category) throws SQLException {
+	public int updateCategory(Category category) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.UPDATE_CATEGORY_QUERY;
 		try {
@@ -141,7 +146,7 @@ public class CategoryDAO {
 			req = connection.prepareStatement(query);
 			req.setString(1, category.getNameCategory());
 			req.setInt(2, category.getIdCategory());
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.print("Category updated : ");
 			category.display();
 		} finally {
@@ -149,6 +154,7 @@ public class CategoryDAO {
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 
 	/**
@@ -156,23 +162,26 @@ public class CategoryDAO {
 	 * 
 	 * @param idCategory
 	 *            The identifying number of the room to delete
+	 *@return The number of lines affected by the request
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
-	public void deleteCategory(int idCategory) throws SQLException {
+	public int deleteCategory(int idCategory) throws SQLException {
+		int result = -1;
 		PreparedStatement req;
 		String query = SQLQueries.DELETE_CATEGORY_QUERY;
 		try {
 			connection = Connector.getConnection();
 			req = connection.prepareStatement(query);
 			req.setInt(1, idCategory);
-			req.executeUpdate();
+			result = req.executeUpdate();
 			System.out.println("Category deleted : " + idCategory);
 		} finally {
 			if (statement != null)
 				statement.close();
 			connection.close();
 		}
+		return result;
 	}
 }
 
