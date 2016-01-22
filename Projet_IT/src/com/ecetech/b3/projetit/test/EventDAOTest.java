@@ -15,6 +15,7 @@ public class EventDAOTest {
 	
 	/**
 	 * Test getEvent
+	 * 
 	 * @throws SQLException	
 	 */
 	@Test
@@ -27,6 +28,7 @@ public class EventDAOTest {
 	
 	/**
 	 * Test insertEvent
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -47,6 +49,7 @@ public class EventDAOTest {
 	
 	/**
 	 * Test updateEvent
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -69,6 +72,7 @@ public class EventDAOTest {
 	
 	/**
 	 * Test deleteEvent
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -89,6 +93,7 @@ public class EventDAOTest {
 
 	/**
 	 * Test a transaction
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -104,6 +109,7 @@ public class EventDAOTest {
 		eve.setIdEvent(9);
 		eve.setContentEvent("un évènement lambda");
 		eve.setDateEvent(new Date(System.currentTimeMillis()));
+		System.out.println(System.currentTimeMillis());
 		eve.setIdCategory(3);
 		eve.setIdUser(2);
 		eve.setNameEvent("maths");

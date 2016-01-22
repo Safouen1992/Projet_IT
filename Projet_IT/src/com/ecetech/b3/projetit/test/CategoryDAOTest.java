@@ -14,6 +14,7 @@ public class CategoryDAOTest {
 
 	/**
 	 * Test getCategory
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -26,6 +27,7 @@ public class CategoryDAOTest {
 	
 	/**
 	 * Test insertCategory
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -42,6 +44,7 @@ public class CategoryDAOTest {
 	
 	/**
 	 * Test UpdateCategory
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -60,6 +63,7 @@ public class CategoryDAOTest {
 	
 	/**
 	 * Test deleteCategory
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -76,6 +80,7 @@ public class CategoryDAOTest {
 	
 	/**
 	 * Test a transaction
+	 * 
 	 * @throws SQLException
 	 */
 	@Test

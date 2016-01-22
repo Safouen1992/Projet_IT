@@ -15,6 +15,7 @@ public class ParticipateDAOTest {
 
 	/**
 	 * Test getParticipate
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -27,6 +28,7 @@ public class ParticipateDAOTest {
 	
 	/**
 	 * Test insertUser
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -50,12 +52,13 @@ public class ParticipateDAOTest {
 		par.setIdUser(4);
 		parDAO.insertParticipate(par);
 		int i = parDAO.updateParticipate(par);
-		assert 1 == i;
+		assertEquals( 1 ,  i);
 		parDAO.deleteParticipate(6);
 	}*/
 	
 	/**
 	 * Test deleteUser
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -72,6 +75,7 @@ public class ParticipateDAOTest {
 	
 	/**
 	 * Test a transaction
+	 * 
 	 * @throws SQLException
 	 */
 	@Test

@@ -14,6 +14,7 @@ public class UserDAOTest {
 
 	/**
 	 * Test getUser
+	 * 
 	 * @throws SQLException	
 	 */
 	@Test
@@ -26,6 +27,7 @@ public class UserDAOTest {
 	
 	/**
 	 * Test insertUser
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -45,6 +47,7 @@ public class UserDAOTest {
 	
 	/**
 	 * Test updateUser
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -66,6 +69,7 @@ public class UserDAOTest {
 	
 	/**
 	 * Test deleteUser
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -85,6 +89,7 @@ public class UserDAOTest {
 	
 	/**
 	 * Test a transaction
+	 * 
 	 * @throws SQLException
 	 */
 	@Test

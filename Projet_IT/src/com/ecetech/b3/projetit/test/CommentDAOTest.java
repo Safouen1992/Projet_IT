@@ -16,6 +16,7 @@ public class CommentDAOTest {
 	
 	/**
 	 * Test getComment
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -28,6 +29,7 @@ public class CommentDAOTest {
 	
 	/**
 	 * Test insertComment
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -44,6 +46,7 @@ public class CommentDAOTest {
 	
 	/**
 	 * Test updateComment
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -62,6 +65,7 @@ public class CommentDAOTest {
 	
 	/**
 	 * Test deleteComment
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
@@ -78,6 +82,7 @@ public class CommentDAOTest {
 	
 	/**
 	 * Test a transaction
+	 * 
 	 * @throws SQLException
 	 */
 	@Test
