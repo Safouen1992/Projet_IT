@@ -12,14 +12,22 @@ import com.ecetech.b3.projetit.dao.CategoryDAO;
 
 public class CategoryDAOTest {
 
+	/**
+	 * Test getCategory
+	 * @throws SQLException
+	 */
 	@Test
 	public void testGet() throws SQLException {
 		Category cat = new Category();
 		CategoryDAO catDAO = new CategoryDAO();
 		ArrayList<Category> cats = catDAO.getCategory(cat);
-		assert "Pierre" == cats.get(0).getNameCategory();
+		assertEquals( "Sport" , cats.get(0).getNameCategory());
 	}
 	
+	/**
+	 * Test insertCategory
+	 * @throws SQLException
+	 */
 	@Test
 	public void testInsert() throws SQLException {
 		Category cat = new Category();
@@ -27,10 +35,15 @@ public class CategoryDAOTest {
 		cat.setNameCategory("Gaming");
 		CategoryDAO catDAO = new CategoryDAO();
 		int i = catDAO.insertCategory(cat);
-		assert 1 == i;
+		assertEquals( 1 , i);
 		catDAO.deleteCategory(6);
 	}
 	
+	
+	/**
+	 * Test UpdateCategory
+	 * @throws SQLException
+	 */
 	@Test
 	public void testUpdate() throws SQLException {
 		Category cat = new Category();
@@ -40,22 +53,31 @@ public class CategoryDAOTest {
 		catDAO.insertCategory(cat);
 		cat.setNameCategory("Jeux de plateaux");
 		int i = catDAO.updateCategory(cat);
-		assert 1 == i;
+		assertEquals( 1 , i);
 		catDAO.deleteCategory(6);
 	}
 	
+	
+	/**
+	 * Test deleteCategory
+	 * @throws SQLException
+	 */
 	@Test
 	public void testDelete() throws SQLException {
 		Category cat = new Category();
 		cat.setIdCategory(6);
 		cat.setNameCategory("Gaming");
 		CategoryDAO catDAO = new CategoryDAO();
+		catDAO.insertCategory(cat);
 		int i = catDAO.deleteCategory(6);
-		assert 1 == i;
+		assertEquals( 1 , i);
 	}
 	
 	
-	
+	/**
+	 * Test a transaction
+	 * @throws SQLException
+	 */
 	@Test
 	public void test() throws SQLException {
 		Category cat = new Category();

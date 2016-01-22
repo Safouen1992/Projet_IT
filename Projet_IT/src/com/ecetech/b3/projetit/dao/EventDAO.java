@@ -26,8 +26,8 @@ public class EventDAO {
 	}
 
 	/**
-	 * Retrieves a Event from the database and then creates a Category object
-	 * to represent it
+	 * Retrieves a Event from the database which match the query and then creates objects
+	 * to represent them
 	 * 
 	 * @param event
 	 *            An object Event containing the informations sought
@@ -89,10 +89,16 @@ public class EventDAO {
 				eve.setContentEvent(rs.getString("contentEvent"));
 				eves.add(eve);
 			}
+		} catch(SQLException e){
+			eves.clear();
+			Event eve = new Event();
+			eve.setIdEvent(-1);
+			eves.add(eve);
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return eves;
 	}
@@ -124,12 +130,18 @@ public class EventDAO {
 				eve.setContentEvent(rs.getString("contentEvent"));
 				eves.add(eve);
 			}
+		} catch(SQLException e){
+			eves.clear();
+			Event eve = new Event();
+			eve.setIdEvent(-1);
+			eves.add(eve);
 		} finally {
 			if (statement != null)
 				statement.close();
 			if (rs != null)
 				rs.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return eves;
 	}
@@ -158,12 +170,15 @@ public class EventDAO {
 			req.setString(6, event.getPlaceEvent());
 			req.setString(7, event.getContentEvent());
 			result = req.executeUpdate();
-			System.out.println("Eventinserted : ");
+			System.out.println("Event inserted : ");
 			event.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -192,10 +207,13 @@ public class EventDAO {
 			result = req.executeUpdate();
 			System.out.println("Event updated :");
 			event.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -219,10 +237,13 @@ public class EventDAO {
 			req.setInt(1, idEvent);
 			result = req.executeUpdate();
 			System.out.println("Event deleted : " + idEvent);
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}

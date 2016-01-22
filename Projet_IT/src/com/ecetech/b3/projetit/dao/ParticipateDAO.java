@@ -26,8 +26,8 @@ public class ParticipateDAO {
 	}
 
 	/**
-	 * Retrieves a Participate from the database and then creates a Category object
-	 * to represent it
+	 * Retrieves a Participate from the database which match the query and then creates objects
+	 * to represent them
 	 * 
 	 * @param participate
 	 *            An object Participate containing the informations sought
@@ -65,10 +65,16 @@ public class ParticipateDAO {
 				par.setIdUser(rs.getInt("idUser"));
 				pars.add(par);
 			}
+		} catch(SQLException e){
+			pars.clear();
+			Participate par = new Participate();
+			par.setIdParticipate(-1);
+			pars.add(par);
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return pars;
 	}
@@ -96,12 +102,18 @@ public class ParticipateDAO {
 				par.setIdUser(rs.getInt("IdUser"));
 				pars.add(par);
 			}
+		} catch(SQLException e){
+			pars.clear();
+			Participate par = new Participate();
+			par.setIdParticipate(-1);
+			pars.add(par);
 		} finally {
 			if (statement != null)
 				statement.close();
 			if (rs != null)
 				rs.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return pars;
 	}
@@ -128,10 +140,13 @@ public class ParticipateDAO {
 			result = req.executeUpdate();
 			System.out.print("Participate inserted: ");
 			participate.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -158,10 +173,13 @@ public class ParticipateDAO {
 			result = req.executeUpdate();
 			System.out.print("Category updated : ");
 			participate.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -185,10 +203,13 @@ public class ParticipateDAO {
 			req.setInt(1, idParticipate);
 			result = req.executeUpdate();
 			System.out.println("Participate deleted : " + idParticipate);
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}

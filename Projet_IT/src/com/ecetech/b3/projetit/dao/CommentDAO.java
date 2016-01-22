@@ -26,8 +26,8 @@ public class CommentDAO {
 	}
 
 	/**
-	 * Retrieves a Comment from the database and then creates a Category object
-	 * to represent it
+	 * Retrieves a Comment from the database which match the query and then creates objects
+	 * to represent them
 	 * 
 	 * @param comment
 	 *            An object Comment containing the informations sought
@@ -65,10 +65,16 @@ public class CommentDAO {
 				com.setContentComment(rs.getString("contentComment"));
 				coms.add(com);
 			}
+		} catch(SQLException e){
+			coms.clear();
+			Comment com = new Comment();
+			com.setIdComment(-1);
+			coms.add(com);
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return coms;
 	}
@@ -96,12 +102,18 @@ public class CommentDAO {
 				com.setContentComment(rs.getString("contentComment"));
 				coms.add(com);
 			}
+		} catch(SQLException e){
+			coms.clear();
+			Comment com = new Comment();
+			com.setIdComment(-1);
+			coms.add(com);
 		} finally {
 			if (statement != null)
 				statement.close();
 			if (rs != null)
 				rs.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return coms;
 	}
@@ -128,10 +140,13 @@ public class CommentDAO {
 			result = req.executeUpdate();
 			System.out.print("Comment inserted : ");
 			comment.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -157,10 +172,13 @@ public class CommentDAO {
 			result = req.executeUpdate();
 			System.out.print("Comment updated :");
 			comment.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -184,10 +202,13 @@ public class CommentDAO {
 			req.setInt(1, idComment);
 			result = req.executeUpdate();
 			System.out.print("Comment deleted : " + idComment);
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}

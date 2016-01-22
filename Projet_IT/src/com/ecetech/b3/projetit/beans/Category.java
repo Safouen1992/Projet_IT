@@ -40,8 +40,9 @@ public class Category {
 	/**
 	 * Constructor
 	 * @param idCategory
-	 * 		
-	 * @param nomCategory
+	 * 		The id of the Category
+	 * @param nameCategory
+	 * 		The name of the Category
 	 */
 	public Category(int idCategory, String nameCategory) {
 		super();

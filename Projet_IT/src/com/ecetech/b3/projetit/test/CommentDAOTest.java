@@ -13,14 +13,23 @@ import com.ecetech.b3.projetit.dao.CommentDAO;
 
 public class CommentDAOTest {
 
+	
+	/**
+	 * Test getComment
+	 * @throws SQLException
+	 */
 	@Test
 	public void testGet() throws SQLException {
 		Comment cat = new Comment();
 		CommentDAO catDAO = new CommentDAO();
 		ArrayList<Comment> cats = catDAO.getComment(cat);
-		assert "J'y serais avec 2 potes" == cats.get(0).getContentComment();
+		assertEquals( "J'y serais avec 2 potes" , cats.get(0).getContentComment());
 	}
 	
+	/**
+	 * Test insertComment
+	 * @throws SQLException
+	 */
 	@Test
 	public void testInsert() throws SQLException {
 		Comment com = new Comment();
@@ -29,10 +38,14 @@ public class CommentDAOTest {
 		com.setIdParticipate(2);
 		com.setContentComment("Moi je propose за");
 		int i = comDAO.insertComment(com);
-		assert 1 == i;
+		assertEquals( 1 , i);
 		comDAO.deleteComment(3);
 	}
 	
+	/**
+	 * Test updateComment
+	 * @throws SQLException
+	 */
 	@Test
 	public void testUpdate() throws SQLException {
 		Comment com = new Comment();
@@ -43,10 +56,14 @@ public class CommentDAOTest {
 		comDAO.insertComment(com);
 		com.setContentComment("Jeux de plateaux");
 		int i = comDAO.updateComment(com);
-		assert 1 == i;
+		assertEquals( 1 , i);
 		comDAO.deleteComment(3);
 	}
 	
+	/**
+	 * Test deleteComment
+	 * @throws SQLException
+	 */
 	@Test
 	public void testDelete() throws SQLException {
 		Comment com = new Comment();
@@ -54,10 +71,15 @@ public class CommentDAOTest {
 		com.setIdParticipate(2);
 		com.setContentComment("Moi je propose за");
 		CommentDAO comDAO = new CommentDAO();
+		comDAO.insertComment(com);
 		int i = comDAO.deleteComment(3);
-		assert 1 == i;
+		assertEquals( 1 , i);
 	}
 	
+	/**
+	 * Test a transaction
+	 * @throws SQLException
+	 */
 	@Test
 	public void test() throws SQLException {
 		Comment com = new Comment();

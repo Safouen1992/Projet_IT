@@ -13,14 +13,22 @@ import com.ecetech.b3.projetit.dao.ParticipateDAO;
 
 public class ParticipateDAOTest {
 
+	/**
+	 * Test getParticipate
+	 * @throws SQLException
+	 */
 	@Test
 	public void testGet() throws SQLException {
 		Participate par = new Participate();
 		ParticipateDAO parDAO = new ParticipateDAO();
 		ArrayList<Participate> pars = parDAO.getParticipate(par);
-		assert 1 == pars.get(0).getIdEvent();
+		assertEquals( 1 , pars.get(0).getIdEvent());
 	}
 	
+	/**
+	 * Test insertUser
+	 * @throws SQLException
+	 */
 	@Test
 	public void testInsert() throws SQLException {
 		Participate par = new Participate();
@@ -29,7 +37,7 @@ public class ParticipateDAOTest {
 		par.setIdEvent(1);
 		par.setIdUser(4);
 		int i = parDAO.insertParticipate(par);
-		assert 1 == i;
+		assertEquals( 1 , i);
 		parDAO.deleteParticipate(6);
 	}
 	
@@ -46,6 +54,10 @@ public class ParticipateDAOTest {
 		parDAO.deleteParticipate(6);
 	}*/
 	
+	/**
+	 * Test deleteUser
+	 * @throws SQLException
+	 */
 	@Test
 	public void testDelete() throws SQLException {
 		Participate par = new Participate();
@@ -53,10 +65,15 @@ public class ParticipateDAOTest {
 		par.setIdEvent(1);
 		par.setIdUser(4);
 		ParticipateDAO parDAO = new ParticipateDAO();
+		parDAO.insertParticipate(par);
 		int i = parDAO.deleteParticipate(6);
-		assert 1 == i;
+		assertEquals( 1 , i);
 	}
 	
+	/**
+	 * Test a transaction
+	 * @throws SQLException
+	 */
 	@Test
 	public void test() throws SQLException {
 		Participate par = new Participate();

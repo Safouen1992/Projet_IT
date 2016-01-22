@@ -26,8 +26,8 @@ public class UserDAO {
 	}
 
 	/**
-	 * Retrieves a User from the database and then creates a Category object
-	 * to represent it
+	 * Retrieves a User from the database which match the query and then creates objects
+	 * to represent them
 	 * 
 	 * @param user
 	 *            An object User containing the informations sought
@@ -83,10 +83,16 @@ public class UserDAO {
 				usr.setAdminUser(rs.getInt("adminUser"));
 				usrs.add(usr);
 			}
+		} catch(SQLException e){
+			usrs.clear();
+			User usr = new User();
+			usr.setIdUser(-1);
+			usrs.add(usr);
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return usrs;
 	}
@@ -117,12 +123,18 @@ public class UserDAO {
 				usr.setAdminUser(rs.getInt("adminUser"));
 				usrs.add(usr);
 			}
+		} catch(SQLException e){
+			usrs.clear();
+			User usr = new User();
+			usr.setIdUser(-1);
+			usrs.add(usr);
 		} finally {
 			if (statement != null)
 				statement.close();
 			if (rs != null)
 				rs.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return usrs;
 	}
@@ -152,10 +164,13 @@ public class UserDAO {
 			result = req.executeUpdate();
 			System.out.print("User inserted: ");
 			user.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -185,10 +200,13 @@ public class UserDAO {
 			result = req.executeUpdate();
 			System.out.print("User updated : ");
 			user.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -212,10 +230,13 @@ public class UserDAO {
 			req.setInt(1, idUser);
 			result = req.executeUpdate();
 			System.out.println("Participate deleted : " + idUser);
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}

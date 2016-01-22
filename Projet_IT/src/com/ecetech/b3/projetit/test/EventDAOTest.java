@@ -13,37 +13,49 @@ import com.ecetech.b3.projetit.dao.EventDAO;
 
 public class EventDAOTest {
 	
+	/**
+	 * Test getEvent
+	 * @throws SQLException	
+	 */
 	@Test
 	public void testGet() throws SQLException {
 		Event eve = new Event();
 		EventDAO eveDAO = new EventDAO();
 		ArrayList<Event> eves = eveDAO.getEvent(eve);
-		assert "J'y serais avec 2 potes" == eves.get(0).getContentEvent();
+		assertEquals( "match de foot" , eves.get(0).getContentEvent());
 	}
 	
+	/**
+	 * Test insertEvent
+	 * @throws SQLException
+	 */
 	@Test
 	public void testInsert() throws SQLException {
 		Event eve = new Event();
 		EventDAO eveDAO = new EventDAO();
 		eve.setIdEvent(9);
 		eve.setContentEvent("un évènement lambda");
-		eve.setDateEvent(new Date(1212, 12, 20));
+		eve.setDateEvent(new Date(System.currentTimeMillis()));
 		eve.setIdCategory(3);
 		eve.setIdUser(2);
 		eve.setNameEvent("maths");
 		eve.setPlaceEvent("p317");
 		int i = eveDAO.insertEvent(eve);
-		assert 1 == i;
+		assertEquals( 1 , i);
 		eveDAO.deleteEvent(9);
 	}
 	
+	/**
+	 * Test updateEvent
+	 * @throws SQLException
+	 */
 	@Test
 	public void testUpdate() throws SQLException {
 		Event eve = new Event();
 		EventDAO eveDAO = new EventDAO();
 		eve.setIdEvent(9);
 		eve.setContentEvent("un évènement lambda");
-		eve.setDateEvent(new Date(1212, 12, 20));
+		eve.setDateEvent(new Date(System.currentTimeMillis()));
 		eve.setIdCategory(3);
 		eve.setIdUser(2);
 		eve.setNameEvent("maths");
@@ -51,25 +63,34 @@ public class EventDAOTest {
 		eveDAO.insertEvent(eve);
 		eve.setContentEvent("Jeux de plateaux");
 		int i = eveDAO.updateEvent(eve);
-		assert 1 == i;
+		assertEquals( 1 ,  i);
 		eveDAO.deleteEvent(9);
 	}
 	
+	/**
+	 * Test deleteEvent
+	 * @throws SQLException
+	 */
 	@Test
 	public void testDelete() throws SQLException {
 		Event eve = new Event();
 		eve.setIdEvent(9);
 		eve.setContentEvent("un évènement lambda");
-		eve.setDateEvent(new Date(1212, 12, 20));
+		eve.setDateEvent(new Date(System.currentTimeMillis()));
 		eve.setIdCategory(3);
 		eve.setIdUser(2);
 		eve.setNameEvent("maths");
 		eve.setPlaceEvent("p317");
 		EventDAO eveDAO = new EventDAO();
+		eveDAO.insertEvent(eve);
 		int i = eveDAO.deleteEvent(9);
-		assert 1 == i;
+		assertEquals( 1 , i);
 	}
 
+	/**
+	 * Test a transaction
+	 * @throws SQLException
+	 */
 	@Test
 	public void test() throws SQLException {
 		Event eve = new Event();
@@ -82,7 +103,7 @@ public class EventDAOTest {
 		
 		eve.setIdEvent(9);
 		eve.setContentEvent("un évènement lambda");
-		eve.setDateEvent(new Date(1212, 12, 20));
+		eve.setDateEvent(new Date(System.currentTimeMillis()));
 		eve.setIdCategory(3);
 		eve.setIdUser(2);
 		eve.setNameEvent("maths");

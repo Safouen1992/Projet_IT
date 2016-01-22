@@ -46,7 +46,7 @@ public class Participate {
 	}
 	/**
 	 * 
-	 * @param idUSer The id of the User in the couple Event/User
+	 * @param idUser The id of the User in the couple Event/User
 	 */
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
@@ -58,7 +58,7 @@ public class Participate {
 	 * 			The id of the couple Event/User
 	 * @param idEvent
 	 * 			The id of the Event in the couple Event/User
-	 * @param idUSer
+	 * @param idUser
 	 * 			The id of the User in the couple Event/User
 	 */
 	public Participate(int idParticipate, int idEvent, int idUser) {

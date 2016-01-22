@@ -26,8 +26,8 @@ public class CategoryDAO {
 	}
 
 	/**
-	 * Retrieves a Category from the database and then creates a Category object
-	 * to represent it
+	 * Retrieves all the Category from the database which match the query and then creates objects
+	 * to represent them
 	 * 
 	 * @param category
 	 *            An object Category containing the informations sought
@@ -59,10 +59,16 @@ public class CategoryDAO {
 				cat.setNameCategory(rs.getString("nameCategory"));
 				cats.add(cat);
 			}
+		} catch(SQLException e){
+			cats.clear();
+			Category cat = new Category();
+			cat.setIdCategory(-1);
+			cats.add(cat);
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return cats;
 	}
@@ -89,12 +95,18 @@ public class CategoryDAO {
 				cat.setNameCategory(rs.getString("nameCategory"));
 				cats.add(cat);
 			}
+		} catch(SQLException e){
+			cats.clear();
+			Category cat = new Category();
+			cat.setIdCategory(-1);
+			cats.add(cat);
 		} finally {
 			if (statement != null)
 				statement.close();
 			if (rs != null)
 				rs.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return cats;
 	}
@@ -120,10 +132,13 @@ public class CategoryDAO {
 			result = req.executeUpdate();
 			System.out.print("Category inserted: ");
 			category.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (req != null)
 				req.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -149,10 +164,13 @@ public class CategoryDAO {
 			result = req.executeUpdate();
 			System.out.print("Category updated : ");
 			category.display();
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}
@@ -176,10 +194,13 @@ public class CategoryDAO {
 			req.setInt(1, idCategory);
 			result = req.executeUpdate();
 			System.out.println("Category deleted : " + idCategory);
+		} catch(SQLException e){
+			result = -1;
 		} finally {
 			if (statement != null)
 				statement.close();
-			connection.close();
+			if(connection != null)
+				connection.close();
 		}
 		return result;
 	}

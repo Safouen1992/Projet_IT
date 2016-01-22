@@ -108,9 +108,9 @@ public class User {
 	 * @param mailUser
 	 * 			The mail of an User
 	 * @param okUser
-	 * 			okUser boolean to see if a User is recognized
+	 * 			Boolean to see if a User is recognized
 	 * @param adminUser
-	 * 			adminUser boolean to see if a User is an administrator
+	 * 			Boolean to see if a User is an administrator
 	 */
 	public User(int idUser, String nameUser, String passwordUser, String mailUser, int okUser, int adminUser) {
 		super();
