@@ -31,7 +31,8 @@ public class EventDAO {
 	 * 
 	 * @param event
 	 *            An object Event containing the informations sought
-	 * @return A Category object with all its attributes from the database
+	 * @return A list of Event objects with all their attributes from the
+	 *         database
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */

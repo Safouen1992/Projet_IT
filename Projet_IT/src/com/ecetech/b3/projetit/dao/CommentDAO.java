@@ -31,7 +31,8 @@ public class CommentDAO {
 	 * 
 	 * @param comment
 	 *            An object Comment containing the informations sought
-	 * @return A Category object with all its attributes from the database
+	 * @return A list of Comment objects with all their attributes from the
+	 *         database
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */

@@ -31,7 +31,8 @@ public class ParticipateDAO {
 	 * 
 	 * @param participate
 	 *            An object Participate containing the informations sought
-	 * @return A Participate object with all its attributes from the database
+	 * @return A list of Participate objects with all their attributes from the
+	 *         database
 	 * @throws SQLException
 	 *             SQL Exception in case it didn't work properly
 	 */
